@@ -9,7 +9,8 @@ RUN set -eux; \
 # ── System packages ───────────────────────────────────────────────────────────
 #   default-libmysqlclient-dev : to build the mysql2 gem
 #   default-mysql-client       : the `mysql` CLI used to import the geo data
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get -o Acquire::AllowInsecureRepositories=true update \
+    && apt-get install -y --no-install-recommends --allow-unauthenticated \
       default-libmysqlclient-dev \
       default-mysql-client \
       xz-utils \
