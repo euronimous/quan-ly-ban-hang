@@ -36,7 +36,6 @@ WORKDIR /app
 # ── Ruby gems (matches Gemfile.lock BUNDLED WITH) ─────────────────────────────
 COPY Gemfile Gemfile.lock ./
 RUN gem install bundler -v 1.17.3 \
-    && bundle _1.17.3_ lock --update mimemagic \
     && bundle _1.17.3_ install --jobs 4 --retry 3
 
 # ── JS packages ───────────────────────────────────────────────────────────────
