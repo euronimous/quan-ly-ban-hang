@@ -13,6 +13,7 @@ RUN apt-get -o Acquire::AllowInsecureRepositories=true update \
     && apt-get install -y --no-install-recommends --allow-unauthenticated \
       default-libmysqlclient-dev \
       default-mysql-client \
+      shared-mime-info \
       xz-utils \
     && rm -rf /var/lib/apt/lists/*
 
@@ -35,6 +36,7 @@ WORKDIR /app
 # ── Ruby gems (matches Gemfile.lock BUNDLED WITH) ─────────────────────────────
 COPY Gemfile Gemfile.lock ./
 RUN gem install bundler -v 1.17.3 \
+    && bundle _1.17.3_ lock --update mimemagic \
     && bundle _1.17.3_ install --jobs 4 --retry 3
 
 # ── JS packages ───────────────────────────────────────────────────────────────
