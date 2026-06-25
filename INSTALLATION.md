@@ -122,6 +122,7 @@ These are wired up automatically through environment variables in `docker-compos
 | Problem | Fix |
 |---|---|
 | `db:create failed` / `Can't connect to MySQL` | Ensure MySQL is running and the root password is `thuy425`. Test: `mysql -u root -pthuy425` |
+| `caching_sha2_password cannot be loaded` | Host is MySQL 8. In the MySQL 8.0 Command Line Client run: `ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'thuy425';` then `CREATE USER IF NOT EXISTS 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'thuy425';` + `GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;` + `FLUSH PRIVILEGES;` |
 | Windows: MySQL connection refused from Docker | MySQL must accept network connections. In `my.ini` ensure `bind-address` is `0.0.0.0` (or commented out), then restart the MySQL57 service |
 | Mac: MySQL refuses Docker connection | Edit `/opt/homebrew/etc/my.cnf`, set `bind-address = 0.0.0.0`, then `brew services restart mysql@5.7` |
 | `Docker is not running` | Open Docker Desktop and wait for the whale icon |

@@ -18,7 +18,8 @@ echo  [OK] Docker is running
 
 :: ── MySQL (host Windows service) ──────────────────────────────────────────────
 echo  Starting MySQL...
-net start MySQL57 >nul 2>&1
+net start MySQL80 >nul 2>&1
+if errorlevel 1 net start MySQL57 >nul 2>&1
 if errorlevel 1 net start MySQL >nul 2>&1
 echo  [OK] MySQL (started or already running)
 
